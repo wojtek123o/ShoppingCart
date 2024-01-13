@@ -1,0 +1,12 @@
+package com.projektowanie.repository;
+
+import com.projektowanie.model.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface ProductRepository extends JpaRepository<Product, Long> {
+    List<Product> findAllByCatalogId(Long catalogId);
+}
