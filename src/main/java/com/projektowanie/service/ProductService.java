@@ -21,7 +21,7 @@ public class ProductService {
     }
 
     public List<Product> getAllProductsFromCatalog(Long catalogId) {
-        return productRepository.findAllByCatalogId(catalogId);
+        return productRepository.findAllByCatalogCatalogId(catalogId);
     }
 
     public void saveProduct(Product product) {
@@ -37,7 +37,7 @@ public class ProductService {
 
     @Transactional
     public void updateProduct(Product updatedProduct) {
-        var product = getProduct(updatedProduct.getId());
+        var product = getProduct(updatedProduct.getProductId());
         product.setCatalog(updatedProduct.getCatalog());
         product.setCategory(updatedProduct.getCategory());
         product.setPrice(updatedProduct.getPrice());

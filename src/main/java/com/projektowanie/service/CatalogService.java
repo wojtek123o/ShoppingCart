@@ -31,7 +31,7 @@ public class CatalogService {
 
     @Transactional
     public void updateCatalog(Catalog updatedCatalog) {
-        var catalog = getCatalog(updatedCatalog.getId());
+        var catalog = getCatalog(updatedCatalog.getCatalogId());
         catalog.setName(updatedCatalog.getName());
         catalog.setProducts(updatedCatalog.getProducts());
         catalog.setLastModificationDate(updatedCatalog.getLastModificationDate());

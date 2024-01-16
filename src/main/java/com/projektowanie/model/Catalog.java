@@ -1,8 +1,6 @@
 package com.projektowanie.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,14 +11,18 @@ import java.util.List;
 @Getter
 @Setter
 public class Catalog {
-
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long catalogId;
 
     private Timestamp lastModificationDate;
 
     private String name;
 
-    @OneToMany
+    @OneToMany (mappedBy = "catalog")
     private List<Product> products;
+
+    @ManyToOne
+    @JoinColumn (name = "employee_id")
+    private Employee employee;
 }

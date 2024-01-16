@@ -31,7 +31,7 @@ public class CategoryService {
 
     @Transactional
     public void updateCategory(Category updatedCategory) {
-        var category = getCategory(updatedCategory.getId());
+        var category = getCategory(updatedCategory.getCategoryId());
         category.setName(category.getName());
     }
 

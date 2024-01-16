@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Getter
@@ -12,7 +13,7 @@ import java.math.BigDecimal;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long productId;
 
     private BigDecimal price;
 
@@ -21,9 +22,13 @@ public class Product {
     private String description;
 
     @ManyToOne
+    @JoinColumn (name = "catalogOfProductId")
     private Catalog catalog;
 
     @ManyToOne
+    @JoinColumn (name = "categoryOfProductId")
     private Category category;
 
+    @OneToMany(mappedBy = "product")
+    private List<ProductInCart> productsInCart;
 }
