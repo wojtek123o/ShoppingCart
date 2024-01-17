@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body, h1, h3 {
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            margin: 0;
+            display: inline;
+            font-size: 30px;
+        }
+
+        h3 {
+            text-align: center;
+            margin-top: 100px;
+            font-size: 20px;
+        }
+
+        p {
+            margin-top: 40px;
+            display: inline;
+            margin-left: 200px;
+            font-size: 16px;
+        }
+
+        /* Style the header */
+        header {
+            background-color: #439DBB;
+            color: #000;
+            text-align: center;
+            padding: 10px;
+            height: 70px;
+            display: flex;
+        }
+
+        /* Style the content section */
+        .content {
+            text-align: center;
+            margin: 20px;
+        }
+
+        /* Style the h3 text */
+        .content h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        /* Style the buttons */
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .button-container button {
+            margin: 0 10px;
+            padding: 8px 16px;
+            font-size: 1em;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .button-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<header th:replace="mainPageLayout :: header"></header>
+
+<h3>Ekran pracownika</h3>
+<form action="/employees/manageProducts" method="get">
+    <button type="submit">Zarządzaj produktami</button>
+</form>
+<form action="/employees/manageComplaints" method="get">
+    <button type="submit">Rozpatrz reklamacje</button>
+</form>
+
+</body>
+</html>

@@ -2,19 +2,19 @@ package com.projektowanie.service;
 
 import com.projektowanie.exception.ProductNotFoundException;
 import com.projektowanie.model.Product;
+import com.projektowanie.repository.CategoryRepository;
 import com.projektowanie.repository.ProductRepository;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ProductService {
     private final ProductRepository productRepository;
-
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+    private final CategoryRepository categoryRepository;
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();
@@ -24,7 +24,12 @@ public class ProductService {
         return productRepository.findAllByCatalogCatalogId(catalogId);
     }
 
+    @Transactional
     public void saveProduct(Product product) {
+        var category = product.getCategory();
+        var categoryFromDb = categoryRepository.findByName(category.getName());
+        category = categoryFromDb.orElseGet(() -> categoryRepository.save(product.getCategory()));
+        product.setCategory(category);
         productRepository.save(product);
     }
 

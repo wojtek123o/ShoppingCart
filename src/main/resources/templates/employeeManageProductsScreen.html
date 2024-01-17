@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<header th:replace="mainPageLayout :: header"></header>
+
+<h3>Ekran pracownika</h3>
+<form action="/products/add" method="get">
+    <button type="submit">Dodaj produkt</button>
+</form>
+
+<form action="/employee/editProduct" method="get">
+    <button type="submit">Edytuj produkt</button>
+</form>
+
+<form action="/products/deleteProduct" method="get">
+    <button type="submit">Usuń produkt</button>
+</form>
+
+<form action="/employee/mainScreen" method="get">
+    <button type="submit">Anuluj</button>
+</form>
+
+
+</body>
+</html>

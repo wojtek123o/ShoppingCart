@@ -15,6 +15,10 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productId;
 
+    private String productName;
+
+    private Integer quantity;
+
     private BigDecimal price;
 
     private byte[] image;
