@@ -10,41 +10,27 @@
 <body>
 <header th:replace="mainPageLayout :: header"></header>
 
-<table>
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Nazwa produktu</th>
-        <th>Waga [kg]</th>
-        <th>Cena [pln]</th>
-        <th>Akcja</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="product : ${products}">
-        <th th:text="${product.id}"/>
-        <th th:text="${product.name}"/>
-        <th th:text="${#numbers.formatDecimal(product.weight, 1, 3)}"/>
-        <th th:text="${#numbers.formatDecimal(product.price, 1, 2)}"/>
-        <th>
-            <form action="#" method="get" th:action="@{/products/details/{id}(id=${product.id})}"
-                  th:value="${product.id}">
-                <button type="submit">Szczegóły</button>
-            </form>
+<form action="/products/edit" method="post" th:object="${product}">
+    <input type="hidden" th:field="*{productId}"/>
+    <label>Nazwa produktu: <input type="text" th:field="*{productName}"/></label><br/>
+    <label for="valueset">Kategoria produktu:</label>
+    <select id="valueset" name="valueset" th:field="*{category.name}">
+        <option th:each="category : ${categories}" th:value="${category.name}" th:text="${category.name}"></option>
+    </select> <br>
+    <label>Ilość produktu: <input type="number" th:field="*{quantity}"/></label><br/>
+    <label>Cena produktu: <input type="text" th:field="*{price}"/></label><br/>
+    <label>Zdjęcie produktu: <input type="image" th:field="*{image}"/></label><br/>
+<!--    <form action="/upload" method="post" enctype="multipart/form-data">-->
+<!--        <label>Zdjęcie produktu: <input type="file" name="image" th:field="*{image}"/></label><br/>-->
+<!--        <input type="submit" value="Upload"/>-->
+<!--    </form>-->
+    <label>Opis produktu: <input type="text" th:field="*{description}"/></label><br/>
 
-            <form action="#" method="get" th:action="@{/products/edit/{id}(id=${product.id})}"
-                  th:value="${product.id}">
-                <button type="submit">Edytuj</button>
-            </form>
-
-            <form action="#" method="post" th:action="@{/products/delete/{id}(id=${product.id})}"
-                  th:value="${product.id}">
-                <button type="submit">Usuń</button>
-            </form>
-        </th>
-    </tr>
-    </tbody>
-</table>
+    <button type="submit">Zapisz zmiany</button>
+    <a th:href="@{/products/edit}">
+        <button type="button">Anuluj</button>
+    </a>
+</form>
 
 </body>
 </html>
