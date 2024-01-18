@@ -68,8 +68,8 @@
         <th th:text="${product.category.name}"/>
         <th th:text="${product.quantity}"/>
         <th th:text="${#numbers.formatDecimal(product.price, 1, 2)}"/>
-        <th th:txt="${product.image}"/>
-        <th th:txt="${product.description}"/>
+        <th th:text="${product.image}"/>
+        <th th:text="${product.description}"/>
         <th>
             <form action="#" method="get" th:action="@{/products/edit/{id}(id=${product.productId})}"
                   th:value="${product.productId}">
