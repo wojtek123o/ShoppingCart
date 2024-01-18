@@ -22,7 +22,7 @@ public class ProductController {
         model.addAttribute("categories", categoryService.getAllCategories());
         model.addAttribute("category", new Category());
         model.addAttribute("newProduct", new Product());
-        return "addProductScreen";
+        return "product/addProductScreen";
     }
 
     @PostMapping("/add")
@@ -34,14 +34,14 @@ public class ProductController {
     @GetMapping("/edit")
     public String editProductsScreen(Model model) {
         model.addAttribute("products", productService.getAllProducts());
-        return "editProductsScreen";
+        return "product/editProductsScreen";
     }
 
     @GetMapping("/edit/{id}")
     public String editProductScreen(@PathVariable Long id, Model model) {
         model.addAttribute("product", productService.getProduct(id));
         model.addAttribute("categories", categoryService.getAllCategories());
-        return "editProductScreen";
+        return "product/editProductScreen";
     }
 
     @PostMapping("/edit")
@@ -53,7 +53,7 @@ public class ProductController {
     @GetMapping("/delete")
     public String deleteProductScreen(Model model) {
         model.addAttribute("products", productService.getAllProducts());
-        return "deleteProductScreen";
+        return "product/deleteProductScreen";
     }
 
     @PostMapping("/delete/{id}")

@@ -17,18 +17,18 @@ public class EmployeeController {
 
     @GetMapping("/mainScreen")
     public String getEmployeeMainScreen(Model model) {
-        return "employeeMainScreen";
+        return "employee/employeeMainScreen";
     }
 
     @GetMapping("/manageProducts")
     public String getEmployeeManageProductsScreen(Model model) {
-        return "employeeManageProductsScreen";
+        return "employee/employeeManageProductsScreen";
     }
 
 
     @GetMapping("/manageComplaints")
     public String getEmployeeManageComplaintsScreen(Model model) {
-        return "employeeManageComplaintsScreen";
+        return "employee/employeeManageComplaintsScreen";
     }
 
 
