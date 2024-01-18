@@ -59,8 +59,8 @@
   </thead>
   <tbody>
   <tr th:each="complaint : ${complaints}">
-    <th th:text="${customerOrder.client.firstName}"/>
-    <th th:text="${customerOrder.client.email}"/>
+    <th th:text="${complaint.customerOrder.client.firstName}"/>
+    <th th:text="${complaint.customerOrder.client.email}"/>
     <th th:text="${complaint.reason}"/>
     <th>
       <form action="#" method="get" th:action="@{/complaints/manage/{id}(id=${complaint.complaintId})}"

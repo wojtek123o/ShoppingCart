@@ -28,11 +28,11 @@ public class ComplaintService {
 
     @Transactional
     public void confirmComplaint(Complaint complaint) {
-        complaint.setComplaintStatus(ComplaintStatus.RESOLVED);
+        getComplaint(complaint.getComplaintId()).setComplaintStatus(ComplaintStatus.RESOLVED);
     }
 
     @Transactional
     public void rejectComplaint(Complaint complaint) {
-        complaint.setComplaintStatus(ComplaintStatus.REJECTED);
+        getComplaint(complaint.getComplaintId()).setComplaintStatus(ComplaintStatus.REJECTED);
     }
 }

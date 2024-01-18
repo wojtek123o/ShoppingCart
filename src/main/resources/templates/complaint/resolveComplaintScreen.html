@@ -7,6 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
+        button {
+            display: inline;
+        }
+
         body {
             font-family: Arial, sans-serif;
         }
@@ -57,6 +61,7 @@
     <label>Powód reklamacji: <input type="text" th:field="*{reason}" disabled/></label><br/>
     <hr>
     <br>
+    <h4>Zakupione produkty:</h4>
     <table>
         <thead>
         <tr>
@@ -69,25 +74,26 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="product : ${complaint.customerOrder.shoppingCart.productsInCart}">
-            <th th:text="${product.productName}"/>
-            <th th:text="${product.category.name}"/>
-            <th th:text="${product.quantity}"/>
-            <th th:text="${#numbers.formatDecimal(product.price, 1, 2)}"/>
-            <th th:text="${product.image}"/>
-            <th th:text="${product.description}"/>
+        <tr th:each="inCartProd : ${complaint.customerOrder.shoppingCart.productsInCart}">
+            <th th:text="${inCartProd.product.productName}"/>
+            <th th:text="${inCartProd.product.category.name}"/>
+            <th th:text="${inCartProd.product.quantity}"/>
+            <th th:text="${#numbers.formatDecimal(inCartProd.product.price, 1, 2)}"/>
+            <th th:text="${inCartProd.product.image}"/>
+            <th th:text="${inCartProd.product.description}"/>
         </tr>
         </tbody>
     </table>
+    <br>
 
     <button type="submit">Zatwierdź</button>
-    <form action="/complaints/reject" method="post" th:object="${complaint}">
-        <button type="submit">Odrzuć</button>
-    </form>
-
-    <a th:href="@{/complaints/manage}">
-        <button type="button">Anuluj</button>
-    </a>
+</form>
+<form action="/complaints/reject" method="post" th:object="${complaint}">
+    <input type="hidden" th:field="*{complaintId}"/>
+    <button type="submit">Odrzuć</button>
+</form>
+<form action="/complaints/manage" method="get" th:object="${complaint}">
+    <button type="submit">Anuluj</button>
 </form>
 
 </body>
