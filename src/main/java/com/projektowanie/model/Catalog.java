@@ -19,10 +19,10 @@ public class Catalog {
 
     private String name;
 
-    @OneToMany (mappedBy = "catalog")
+    @OneToMany(mappedBy = "catalog")
     private List<Product> products;
 
     @ManyToOne
-    @JoinColumn (name = "employee_id")
+    @JoinColumn(name = "employee_id")
     private Employee employee;
 }

@@ -27,7 +27,7 @@ public class Discount {
     private Boolean isUsed;
 
     @ManyToOne
-    @JoinColumn (name = "discountForClientId")
+    @JoinColumn (name = "discount_for_client_id")
     private Client client;
 
     @OneToMany (mappedBy = "discount")

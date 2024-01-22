@@ -22,11 +22,11 @@ public class Product {
     private String description;
 
     @ManyToOne
-    @JoinColumn (name = "catalogOfProductId")
+    @JoinColumn (name = "catalog_of_product_id")
     private Catalog catalog;
 
     @ManyToOne
-    @JoinColumn (name = "categoryOfProductId")
+    @JoinColumn (name = "category_of_product_id")
     private Category category;
 
     @OneToMany(mappedBy = "product")
