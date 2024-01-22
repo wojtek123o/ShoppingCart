@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -6,30 +6,112 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 800px; /* Adjust the max-width as needed */
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .input-container {
+            width: 48%;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, select {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .button-container {
+            display: inline-block;
+            justify-items: center;
+            align-items: center;
+            align-self: center;
+            text-align: center;
+            align-content: center;
+            justify-content: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        button {
+            background-color: gray;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin-right: 20%;
+        }
+    </style>
 </head>
 <body>
 <header th:replace="mainPageLayout :: header"></header>
 
 <form action="/products/add" method="post" th:object="${newProduct}">
-    <label>Nazwa produktu: <input type="text" th:field="*{productName}"/></label><br/>
-    <label for="valueset">Kategoria produktu:</label>
-    <select id="valueset" name="valueset" th:field="*{category.name}">
-        <option th:each="category : ${categories}" th:value="${category.name}" th:text="${category.name}"></option>
-    </select> <br>
-    <label>Ilość produktu: <input type="number" th:field="*{quantity}"/></label><br/>
-    <label>Cena produktu: <input type="text" th:field="*{price}"/></label><br/>
-    <label>Zdjęcie produktu: <input type="file" name="image" th:field="*{image}"/></label>
-    <img src="/assets/blank.jpg" alt="Zdjecie produktu" th:src="*{image}">
-    <br/>
+    <div class="input-container">
+        <label>Nazwa produktu:</label>
+        <input type="text" th:field="*{productName}"/>
+    </div>
 
-    <label>Opis produktu: <input type="text" th:field="*{description}"/></label><br/>
+    <div class="input-container">
+        <label>Ilość produktu:</label>
+        <input type="number" th:field="*{quantity}"/>
+    </div>
 
-    <button type="submit">Dodaj produkt</button>
-    <a th:href="@{/employees/mainScreen}">
-        <button type="button">Anuluj</button>
-    </a>
+    <div class="input-container">
+        <label>Cena produktu:</label>
+        <input type="text" th:field="*{price}"/>
+    </div>
+
+    <div class="input-container">
+        <label for="valueset">Kategoria produktu:</label>
+        <select id="valueset" name="valueset" th:field="*{category.name}">
+            <option th:each="category : ${categories}" th:value="${category.name}" th:text="${category.name}"></option>
+        </select>
+    </div>
+
+    <div class="input-container">
+        <label>Opis produktu:</label>
+        <input type="text" th:field="*{description}"/>
+    </div>
+
+    <div class="input-container">
+        <label>Zdjęcie produktu:</label>
+        <input type="file" name="image" th:field="*{image}"/>
+        <img src="/assets/blank.jpg" alt="Zdjecie produktu" th:src="*{image}">
+    </div>
+
+    <div class="button-container">
+        <button type="submit">Dodaj produkt</button>
+        <a th:href="@{/employees/mainScreen}">
+            <button type="button">Anuluj</button>
+        </a>
+    </div>
 </form>
-
 
 </body>
 </html>

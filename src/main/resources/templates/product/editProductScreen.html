@@ -7,27 +7,107 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 800px; /* Adjust the max-width as needed */
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .input-container {
+        width: 48%;
+        margin-bottom: 10px;
+        display: inline-block;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input, select {
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+
+    .button-container {
+        display: inline-block;
+        justify-items: center;
+        align-items: center;
+        align-self: center;
+        text-align: center;
+        align-content: center;
+        justify-content: center;
+        margin-top: 20px;
+        width: 100%;
+    }
+
+    button {
+        background-color: gray;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+        margin-right: 20%;
+    }
+</style>
 <body>
 <header th:replace="mainPageLayout :: header"></header>
 
 <form action="/products/edit" method="post" th:object="${product}">
-    <input type="hidden" th:field="*{productId}"/>
-    <label>Nazwa produktu: <input type="text" th:field="*{productName}"/></label><br/>
-    <label for="valueset">Kategoria produktu:</label>
-    <select id="valueset" name="valueset" th:field="*{category.name}">
-        <option th:each="category : ${categories}" th:value="${category.name}" th:text="${category.name}"></option>
-    </select> <br>
-    <label>Ilość produktu: <input type="number" th:field="*{quantity}"/></label><br/>
-    <label>Cena produktu: <input type="text" th:field="*{price}"/></label><br/>
-    <label>Zdjęcie produktu: <input type="file" name="image" th:field="*{image}"/></label>
-    <img src="/assets/blank.jpg" alt="Zdjecie produktu" th:src="*{image}">
-    <br/>
-    <label>Opis produktu: <input type="text" th:field="*{description}"/></label><br/>
+    <div class="input-container">
+        <input type="hidden" th:field="*{productId}"/>
+        <label>Nazwa produktu: <input type="text" th:field="*{productName}"/></label><br/>
+    </div>
 
-    <button type="submit">Zapisz zmiany</button>
-    <a th:href="@{/products/edit}">
-        <button type="button">Anuluj</button>
-    </a>
+    <div class="input-container">
+        <label>Ilość produktu: <input type="number" th:field="*{quantity}"/></label><br/>
+    </div>
+
+    <div class="input-container">
+        <label>Cena produktu: <input type="text" th:field="*{price}"/></label><br/>
+    </div>
+
+    <div class="input-container">
+        <label for="valueset">Kategoria produktu:</label>
+        <select id="valueset" name="valueset" th:field="*{category.name}">
+            <option th:each="category : ${categories}" th:value="${category.name}" th:text="${category.name}"></option>
+        </select> <br>
+    </div>
+
+    <div class="input-container">
+        <label>Opis produktu: <input type="text" th:field="*{description}"/></label><br/>
+    </div>
+
+    <div class="input-container">
+        <label>Zdjęcie produktu: <input type="file" name="image" th:field="*{image}"/></label>
+        <br>
+        <img src="/assets/blank.jpg" alt="Zdjecie produktu" th:src="*{image}">
+    </div>
+
+    <div class="button-container">
+        <button type="submit">Zapisz zmiany</button>
+        <a th:href="@{/products/edit}">
+            <button type="button">Anuluj</button>
+        </a>
+    </div>
 </form>
 
 </body>

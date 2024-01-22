@@ -44,9 +44,25 @@
     margin-right: 10px;
     margin-top: 1px;
   }
+
+  .cancel-button {
+    background-color: gray;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
 </style>
 <body>
 <header th:replace="mainPageLayout :: header"></header>
+<br>
+
+<h3>
+  Wybierz reklamację
+</h3>
 
 <table>
   <thead>
@@ -71,9 +87,10 @@
   </tr>
   </tbody>
 </table>
+<br>
 
 <a th:href="@{/employees/mainScreen}">
-  <button type="button">Anuluj</button>
+  <button type="button" class="cancel-button">Anuluj</button>
 </a>
 
 </body>

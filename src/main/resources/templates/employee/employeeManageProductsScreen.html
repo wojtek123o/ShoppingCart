@@ -6,27 +6,71 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+
+        .button-container {
+            margin-top: 10%;
+            display: inline-block;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: cadetblue;
+            padding: 20px;
+            border-radius: 10px;
+            margin-left: 32%;
+        }
+
+        form {
+            display: inline;
+        }
+
+        button {
+            background-color: gray;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        body {
+            width: 100%;
+            display: inline-block;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
 <header th:replace="mainPageLayout :: header"></header>
 
-<h3>Ekran pracownika</h3>
-<form action="/products/add" method="get">
-    <button type="submit">Dodaj produkt</button>
-</form>
+<br>
 
-<form action="/products/edit" method="get">
-    <button type="submit">Edytuj produkt</button>
-</form>
+<div class="button-container">
+    <form action="/products/add" method="get">
+        <button type="submit">Dodaj produkt</button>
+    </form>
 
-<form action="/products/delete" method="get">
-    <button type="submit">Usuń produkt</button>
-</form>
+    <form action="/products/edit" method="get">
+        <button type="submit">Edytuj produkt</button>
+    </form>
 
-<form action="/employees/mainScreen" method="get">
-    <button type="submit">Anuluj</button>
-</form>
-
+    <form action="/products/delete" method="get">
+        <button type="submit">Usuń produkt</button>
+    </form>
+    <br>
+    <br>
+    <form action="/employees/mainScreen" method="get">
+        <button type="submit" class="cancel">Anuluj</button>
+    </form>
+</div>
 
 </body>
 </html>
