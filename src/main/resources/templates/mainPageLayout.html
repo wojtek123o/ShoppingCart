@@ -10,8 +10,21 @@
 <body>
 <header th:fragment="header">
     <section class="header">
-        <h1>Sklep spożywczy</h1>
-        <p><b>Moje konto</b></p>
+        <div class="navigation">
+            <div class="hamburger">&#9776;</div>
+
+            <div class="language-dropdown">
+                <div class="languages">PL</div>
+                <div class="language-dropdown-content">
+                    <a href="#">PL</a>
+                    <a href="#">EN</a>
+                </div>
+            </div>
+
+            <h1>Sklep spożywczy</h1>
+            <p><b>Moje konto</b></p>
+            <div class="cart-icon"><i class="fas fa-shopping-cart"></i></div>
+        </div>
     </section>
 </header>
 
