@@ -26,6 +26,6 @@ public class Complaint {
     private CustomerOrder customerOrder;
 
     @ManyToOne
-    @JoinColumn (name = "employee_id")
+    @JoinColumn(name = "employee_id")
     private Employee employee;
 }

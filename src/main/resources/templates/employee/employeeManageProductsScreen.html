@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+
+        .button-container {
+            margin-top: 10%;
+            display: inline-block;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: cadetblue;
+            padding: 20px;
+            border-radius: 10px;
+            margin-left: 32%;
+        }
+
+        form {
+            display: inline;
+        }
+
+        button {
+            background-color: gray;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        body {
+            width: 100%;
+            display: inline-block;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        header {
+            background-color: #439DBB;
+            color: #000;
+            text-align: center;
+            padding: 10px;
+            height: 90px;
+            display: flex;
+        }
+
+        p {
+            margin-top: 40px;
+            display: inline;
+            margin-left: 200px;
+            font-size: 16px;
+            width: 180px;
+        }
+
+        .navigation {
+            display: flex;
+            align-items: center;
+        }
+
+        .hamburger {
+            margin-left: 10%;
+            margin-right: 20px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .languages {
+            margin-right: 340px;
+        }
+
+        .cart-icon {
+            margin-left: auto;
+            font-size: 20px;
+        }
+
+        .language-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .language-dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .language-dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .language-dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .language-dropdown:hover .language-dropdown-content {
+            display: block;
+        }
+
+        h1 {
+            margin: 0 auto;
+            font-size: 30px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+<header th:replace="mainPageLayout :: header"></header>
+
+<br>
+
+<div class="button-container">
+    <form action="/products/add" method="get">
+        <button type="submit">Dodaj produkt</button>
+    </form>
+
+    <form action="/products/edit" method="get">
+        <button type="submit">Edytuj produkt</button>
+    </form>
+
+    <form action="/products/delete" method="get">
+        <button type="submit">Usuń produkt</button>
+    </form>
+    <br>
+    <br>
+    <form action="/employees/mainScreen" method="get">
+        <button type="submit" class="cancel">Anuluj</button>
+    </form>
+</div>
+
+</body>
+</html>

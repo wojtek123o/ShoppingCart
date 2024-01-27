@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<header th:fragment="header">
+    <section class="header">
+        <div class="navigation">
+            <div class="hamburger">&#9776;</div>
+
+            <div class="language-dropdown">
+                <div class="languages">PL</div>
+                <div class="language-dropdown-content">
+                    <a href="#">PL</a>
+                    <a href="#">EN</a>
+                </div>
+            </div>
+
+            <h1>Sklep spożywczy</h1>
+            <p><b>Moje konto</b></p>
+            <div class="cart-icon"><i class="fas fa-shopping-cart"></i></div>
+        </div>
+    </section>
+</header>
+
+</body>
+</html>
