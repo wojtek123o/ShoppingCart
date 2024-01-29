@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,5 +25,5 @@ public class Payment {
     private Timestamp paymentDate;
 
     @OneToMany(mappedBy = "payment")
-    private List<CustomerOrder> customerOrders;
+    private List<CustomerOrder> customerOrders = new ArrayList<>();
 }

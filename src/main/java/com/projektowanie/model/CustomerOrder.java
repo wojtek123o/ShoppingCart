@@ -24,6 +24,8 @@ public class CustomerOrder {
 
     private BigDecimal orderTotalPrice;
 
+    private BigDecimal discountTotalPrice;
+
     @ManyToOne
     @JoinColumn (name = "client_id")
     private Client client;

@@ -17,6 +17,8 @@ public class Discount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long discountId;
 
+    private String name;
+
     private BigDecimal discountAmount;
 
     private Timestamp issueDate;

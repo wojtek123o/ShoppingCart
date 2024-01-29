@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="_shared/_layout"
+      xmlns:th="http://www.thymeleaf.org">
+
+<title>Lista produktów</title>
+
+<div layout:fragment="content">
+    <div class="header">
+        <h1>Lista produktów</h1>
+        <a class="btn btn-primary" th:href="@{/order/placeOrder}">Złóż zamówienie</a>
+    </div>
+    <div class="content">
+        <table class="display table table-bordered" style="width:800px">
+            <thead class="text-center">
+            <tr>
+                <th class="text-right">Id</th>
+                <th class="text-left">Nazwa</th>
+                <th class="text-left">Cena</th>
+                <th class="text-left">Ilość</th>
+                <th class="text-center" colspan="3">Akcje</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${shoppingCart != null}" th:each="productInCart : ${shoppingCart.productsInCart}">
+                <td th:text="${productInCart.product.productId}"></td>
+                <td th:text="${productInCart.product.productName}"></td>
+                <td th:text="${productInCart.product.price}"></td>
+                <td th:text="${productInCart.quantity}"></td>
+
+                <td>
+                    <a class="btn btn-success" th:href="@{/shoppingCart/increaseQuantity/{productId}(productId=${productInCart.product.productId})}">+</a>
+                </td>
+                <td th:text="${productInCart.quantity}"></td>
+                <td>
+                    <a class="btn btn-warning" th:href="@{/shoppingCart/decreaseQuantity/{productId}(productId=${productInCart.product.productId})}">-</a>
+                </td>
+                <td><a class="btn btn-danger" th:href="@{/shoppingCart/removeProduct/{productId}(productId=${productInCart.product.productId})}">Usuń</a></td>
+<!--                <td><a class="btn btn-primary" th:href="@{/produkt/{produktId}/edit(produktId=${produkt.produktId})}">Edycja</a></td>-->
+<!--                <td><a class="btn btn-danger" th:href="@{/produkt/remove(id=${produkt.produktId})}">Usuwanie</a></td>-->
+            </tr>
+            </tbody>
+        </table>
+        <div>
+            <h3>Wartość koszyka: <span th:text="${shoppingCart.totalPrice}"></span> zł</h3>
+        </div>
+    </div>
+</div>
+
+</html>

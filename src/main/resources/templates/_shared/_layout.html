@@ -1,0 +1,26 @@
+<!-- w pliku pom.xml dodano zależność dla Thymeleaf Layout Dialect -->
+<!-- mechanizam fragmentów - powtarzające się części kodu html można wydzielić do osobnych plików i odpowiednim atrybutem Thymeleaf wstawić do kodu w wybrane miejsce  -->
+
+<!-- plik układu strony z dodanymi fragmentami -->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="text/html; UTF-8">
+    <!-- zaimportowanie narzędzi-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title layout:fragment="title">Produkty</title>
+</head>
+<body>
+<header th:replace="_shared/_header::myheader"> </header>
+<main>
+    <div layout:fragment="content">     <!-- fragment content - miejsce wypełaniane przez widoki -->
+        <p>Zmiana kontentu</p>
+    </div>
+</main>
+<footer th:replace="_shared/_footer::myfooter"> </footer>
+</body>
+</html>
