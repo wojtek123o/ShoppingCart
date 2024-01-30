@@ -36,7 +36,7 @@ public class ShoppingCartService {
         Product chleb = existingChleb.orElseGet(() -> {
             Product newChleb = new Product();
             newChleb.setProductName("Chleb");
-            newChleb.setPrice(BigDecimal.valueOf(5.30));
+            newChleb.setPrice(BigDecimal.valueOf(5.20));
             newChleb.setImageName("chleb.jpeg");
             newChleb.setProductsInCart(new ArrayList<>());
             return productRepository.save(newChleb);
@@ -46,19 +46,31 @@ public class ShoppingCartService {
         Product mleko = existingMleko.orElseGet(() -> {
             Product newMleko = new Product();
             newMleko.setProductName("Mleko");
-            newMleko.setPrice(BigDecimal.valueOf(3.30));
+            newMleko.setPrice(BigDecimal.valueOf(3.20));
             newMleko.setImageName("mleko.jpg");
             newMleko.setProductsInCart(new ArrayList<>());
             return productRepository.save(newMleko);
+        });
+
+        Optional<Product> existingCarrot = productRepository.findByProductName("Marchewka 1kg");
+        Product carrot = existingCarrot.orElseGet(() -> {
+            Product newCarrot = new Product();
+            newCarrot.setProductName("Marchewka 1kg");
+            newCarrot.setPrice(BigDecimal.valueOf(2.20));
+            newCarrot.setImageName("carrot.jpg");
+            newCarrot.setProductsInCart(new ArrayList<>());
+            return productRepository.save(newCarrot);
         });
 
         shoppingCart= shoppingCartRepository.save(shoppingCart);
 
         ProductInCartId product1InCartId = new ProductInCartId(chleb.getProductId(), shoppingCart.getShoppingCartId());
         ProductInCartId product2InCartId = new ProductInCartId(mleko.getProductId(), shoppingCart.getShoppingCartId());
+        ProductInCartId product3InCartId = new ProductInCartId(carrot.getProductId(), shoppingCart.getShoppingCartId());
 
         ProductInCart product1InCart = new ProductInCart();
         ProductInCart product2InCart = new ProductInCart();
+        ProductInCart product3InCart = new ProductInCart();
 
         product1InCart.setId(product1InCartId);
         product1InCart.setProduct(chleb);
@@ -72,16 +84,28 @@ public class ShoppingCartService {
         product2InCart.setQuantity(1);
         product2InCart.setProductInCartTotalPrice(mleko.getPrice());
 
+        product3InCart.setId(product3InCartId);
+        product3InCart.setProduct(carrot);
+        product3InCart.setShoppingCart(shoppingCart);
+        product3InCart.setQuantity(1);
+        product3InCart.setProductInCartTotalPrice(carrot.getPrice());
+
         product1InCart = productInCartRepository.save(product1InCart);
         product2InCart = productInCartRepository.save(product2InCart);
+        product3InCart = productInCartRepository.save(product3InCart);
 
         chleb.getProductsInCart().add(product1InCart);
         mleko.getProductsInCart().add(product2InCart);
+        carrot.getProductsInCart().add(product3InCart);
+
         shoppingCart.getProductsInCart().add(product1InCart);
         shoppingCart.getProductsInCart().add(product2InCart);
+        shoppingCart.getProductsInCart().add(product3InCart);
 
         productRepository.save(chleb);
         productRepository.save(mleko);
+        productRepository.save(carrot);
+
         shoppingCart.setTotalPrice(calculateTotalPrice(shoppingCart.getProductsInCart()));
         shoppingCartRepository.save(shoppingCart);
 
@@ -173,6 +197,20 @@ public class ShoppingCartService {
                 removeProductFromCart(productId);
             }
         });
+    }
+
+    public int getShoppingCartSize() {
+        Optional<ShoppingCart> optionalShoppingCart = shoppingCartRepository.findShoppingCartWithProductsById(1L);
+        ShoppingCart shoppingCart = optionalShoppingCart.orElse(null);
+        if (shoppingCart == null) {
+            return 0;
+        } else {
+            if(shoppingCart.getProductsInCart() == null) {
+                return 0;
+            } else {
+                return shoppingCart.getProductsInCart().size();
+            }
+        }
     }
 
 }

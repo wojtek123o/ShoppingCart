@@ -23,7 +23,7 @@ public class ShoppingCartController {
     public String shoppingCart(Model model) {
         ShoppingCart shoppingCart = shoppingCartService.getShoppingCartWithProducts();
         model.addAttribute("shoppingCart", shoppingCart);
-
+        model.addAttribute("cartSize", shoppingCartService.getShoppingCartSize());
         return "shoppingCart/productsInCartScreen";
     }
 
