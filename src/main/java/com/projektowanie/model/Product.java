@@ -23,7 +23,7 @@ public class Product {
 
     private BigDecimal price;
 
-    private byte[] image;
+    private String imageName;
 
     private String description;
 

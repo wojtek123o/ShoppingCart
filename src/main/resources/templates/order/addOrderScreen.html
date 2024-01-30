@@ -3,76 +3,133 @@
       layout:decorate="_shared/_layout"
       xmlns:th="http://www.thymeleaf.org">
 
-<title>Lista produktów</title>
+<head>
+    <title>Zamówienie</title>
+</head>
+
 
 <div layout:fragment="content">
-    <div class="header">
-        <h1>Formularz zamówienia</h1>
-    </div>
-    <form action="/order/placeOrder" method="post" th:object="${customerOrder}">
+    <section class="h-100">
+        <div class="container h-100 py-5">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-10">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="text-center">Formularz zamówienia</h3>
+                    </div>
+    <form name="myForm" action="#" th:action="@{/order/placeOrder}" method="post">
         <!-- Wybór dostawy -->
-        <fieldset>
-            <legend>Wybór Dostawy</legend>
-            <label>
-                <input type="radio"  th:field="*{shipping.shippingType}" th:value="COURIER" required>
-                Kurier - Cena: 20 zł
-            </label>
-            <label>
-                <input type="radio" th:field="*{shipping.shippingType}" th:value="POST_OFFICE" required>
-                Poczta - Cena: 15 zł
-            </label>
-        </fieldset>
+        <div class="card rounded-3 mb-4">
+            <div class="card-body p-4">
+                <div class="row d-flex justify-content-between align-items-center">
+                    <!-- Kolumna z opisem "Wybór dostawy" -->
+                    <div class="col-md-6 col-lg-6 col-xl-6">
+                        <fieldset class="form-group">
+                            <legend>Wybór dostawy</legend>
+                        </fieldset>
+                    </div>
 
-        <!-- Metoda płatności -->
-        <fieldset>
-            <legend>Metoda Płatności</legend>
-            <label>
-                <input type="radio" th:field="*{payment.paymentType}" th:value="BANK_TRANSFER" required>
-                Online
-            </label>
-            <label>
-                <input type="radio" th:field="*{payment.paymentType}" th:value="CASH_ON_DELIVERY" required>
-                Przy Odbiorze
-            </label>
-        </fieldset>
+                    <!-- Kolumna z przyciskami radio -->
+                    <div class="col-md-6 col-lg-6 col-xl-6">
+                        <fieldset class="form-group">
+                            <div class="row">
+                                <div class="col-sm-10">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" th:field="${shipping.shippingType}" name="gridRadios" id="gridRadios1" th:value="COURIER" required>
+                                        <label class="form-check-label" for="gridRadios1">
+                                            Kurier - Cena 20 zł
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" th:field="${shipping.shippingType}" name="gridRadios" id="gridRadios2" th:value="POST_OFFICE" required>
+                                        <label class="form-check-label" for="gridRadios2">
+                                            Poczta - Cena 15 zł
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <!-- Formularz adresu dostawy -->
-        <fieldset>
-            <legend>Formularz Adresu Dostawy</legend>
-            <label>
-                Miejscowość:
-                <input type="text" th:field="*{shipping.shippingCity}" required>
-            </label>
-            <label>
-                Ulica:
-                <input type="text" th:field="*{shipping.shippingStreet}" required>
-            </label>
-            <label>
-                Numer ulicy:
-                <input type="number" th:field="*{shipping.shippingStreetNumber}" required>
-            </label>
-            <label>
-                Numer mieszkania:
-                <input type="number" th:field="*{shipping.shippingHouseNumber}" required>
-            </label>
-            <label>
-                Kod pocztowy:
-                <input type="number" th:field="*{shipping.shippingPostalCode}" pattern="[0-9]{2}-[0-9]{3}" placeholder="np. 57-300" required>
-            </label>
-        </fieldset>
+        <div class="card rounded-3 mb-4">
+            <div class="card-body p-4">
+                <div class="row d-flex justify-content-between align-items-center">
+                    <!-- Kolumna z opisem "Wybór dostawy" -->
+                    <div class="col-md-6 col-lg-6 col-xl-6">
+                        <fieldset class="form-group">
+                            <legend>Wybór płatności</legend>
+                        </fieldset>
+                    </div>
 
-        <fieldset>
-            <legend>Dodaj rabat</legend>
-            <label>
-                Dostępne rabaty:
-                <select th:field="*{discount.name}">
-                    <option th:each="discount : ${availableDiscounts}" th:value="${discount.name}" th:text="${discount.name}"></option>
-                </select>
-            </label>
-        </fieldset>
-<!--        <input type="hidden" th:field="${customerOrder.shoppingCart}">-->
-        <input type="submit" value="Złóż zamówienie">
+                    <!-- Kolumna z przyciskami radio -->
+                    <div class="col-md-6 col-lg-6 col-xl-6">
+                        <fieldset class="form-group">
+                            <div class="row">
+                                <div class="col-sm-10">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" th:field="${customerOrder.payment.paymentType}" name="gridRadios" id="gridRadios3" th:value="BANK_TRANSFER" required>
+                                        <label class="form-check-label" for="gridRadios1">
+                                            Płatność online
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" th:field="${customerOrder.payment.paymentType}" name="gridRadios" id="gridRadios4" th:value="CASH_ON_DELIVERY" required>
+                                        <label class="form-check-label" for="gridRadios2">
+                                            Płatność przy odbiorze
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputCity">Miasto</label>
+                <input type="text" th:field="${shipping.shippingCity}" class="form-control" id="inputCity" placeholder="Miasto" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputKod">Kod pocztowy</label>
+                <input type="text" name="postalCode" th:field="${shipping.shippingPostalCode}" class="form-control" id="inputKod" placeholder="Kod pocztowy" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="street">Ulica</label>
+                <input type="text" th:field="${shipping.shippingStreet}" class="form-control" id="street" placeholder="Ulica" required>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="streetNum">Numer ulicy</label>
+                <input type="text" name="streetNumber" th:field="${shipping.shippingStreetNumber}" class="form-control" id="streetNum" placeholder="Numer ulicy">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="houseNum">Numer mieszkania</label>
+                <input type="text" name="houseNumber" th:field="${shipping.shippingHouseNumber}" class="form-control" id="houseNum" placeholder="Numer mieszkania" required>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6 mx-auto text-center">
+            <label for="discount">Wybierz z dostępnych rabatów</label>
+            <select id="discount" class="form-control" th:field="${customerOrder.discount.name}">
+                <option th:each="discount : ${availableDiscounts}" th:value="${discount.name}" th:text="${discount.name}"></option>
+            </select>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <input type="submit" value="Przejdź do podsumowania" class="btn btn-success btn-block btn-lg">
+            </div>
+        </div>
+
     </form>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
 </html>

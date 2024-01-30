@@ -37,6 +37,7 @@ public class ShoppingCartService {
             Product newChleb = new Product();
             newChleb.setProductName("Chleb");
             newChleb.setPrice(BigDecimal.valueOf(5.30));
+            newChleb.setImageName("chleb.jpeg");
             newChleb.setProductsInCart(new ArrayList<>());
             return productRepository.save(newChleb);
         });
@@ -46,6 +47,7 @@ public class ShoppingCartService {
             Product newMleko = new Product();
             newMleko.setProductName("Mleko");
             newMleko.setPrice(BigDecimal.valueOf(3.30));
+            newMleko.setImageName("mleko.jpg");
             newMleko.setProductsInCart(new ArrayList<>());
             return productRepository.save(newMleko);
         });
@@ -62,11 +64,13 @@ public class ShoppingCartService {
         product1InCart.setProduct(chleb);
         product1InCart.setShoppingCart(shoppingCart);
         product1InCart.setQuantity(1);
+        product1InCart.setProductInCartTotalPrice(chleb.getPrice());
 
         product2InCart.setId(product2InCartId);
         product2InCart.setProduct(mleko);
         product2InCart.setShoppingCart(shoppingCart);
         product2InCart.setQuantity(1);
+        product2InCart.setProductInCartTotalPrice(mleko.getPrice());
 
         product1InCart = productInCartRepository.save(product1InCart);
         product2InCart = productInCartRepository.save(product2InCart);
@@ -81,14 +85,29 @@ public class ShoppingCartService {
         shoppingCart.setTotalPrice(calculateTotalPrice(shoppingCart.getProductsInCart()));
         shoppingCartRepository.save(shoppingCart);
 
-        Discount discount1 = new Discount();
-        discount1.setName("WIOSNA10");
-        discount1.setDiscountAmount(new BigDecimal("10"));
-        Discount discount2 = new Discount();
-        discount2.setName("WIOSNA20");
-        discount2.setDiscountAmount(new BigDecimal("20"));
-        discountRepository.save(discount1);
-        discountRepository.save(discount2);
+        Discount existingDiscount1 = discountRepository.findByName("Nie wybrano");
+        if(existingDiscount1 == null) {
+            Discount discount1 = new Discount();
+            discount1.setName("Nie wybrano");
+            discount1.setDiscountAmount(new BigDecimal("0"));
+            discountRepository.save(discount1);
+        }
+
+        Discount existingDiscount2 = discountRepository.findByName("WIOSNA10");
+        if (existingDiscount2 == null) {
+            Discount discount2 = new Discount();
+            discount2.setName("WIOSNA10");
+            discount2.setDiscountAmount(new BigDecimal("10"));
+            discountRepository.save(discount2);
+        }
+
+        Discount existingDiscount3 = discountRepository.findByName("WIOSNA20");
+        if (existingDiscount3 == null) {
+            Discount discount3 = new Discount();
+            discount3.setName("WIOSNA20");
+            discount3.setDiscountAmount(new BigDecimal("20"));
+            discountRepository.save(discount3);
+        }
     }
 
     @Transactional
@@ -145,6 +164,7 @@ public class ShoppingCartService {
 
             if (newQuantity > 0) {
                 productInCart.setQuantity(newQuantity);
+                productInCart.setProductInCartTotalPrice(productInCart.getProduct().getPrice().multiply(BigDecimal.valueOf(productInCart.getQuantity())));
                 ShoppingCart shoppingCart = productInCart.getShoppingCart();
                 shoppingCart.setTotalPrice(calculateTotalPrice(shoppingCart.getProductsInCart()));
                 shoppingCartRepository.save(shoppingCart);
@@ -154,4 +174,5 @@ public class ShoppingCartService {
             }
         });
     }
+
 }

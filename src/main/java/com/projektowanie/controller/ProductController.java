@@ -44,11 +44,11 @@ public class ProductController {
         return "product/editProductScreen";
     }
 
-    @PostMapping("/edit")
-    public String editProduct(@ModelAttribute Product updatedProduct) {
-        productService.updateProduct(updatedProduct);
-        return "redirect:/products/edit";
-    }
+//    @PostMapping("/edit")
+//    public String editProduct(@ModelAttribute Product updatedProduct) {
+//        productService.updateProduct(updatedProduct);
+//        return "redirect:/products/edit";
+//    }
 
     @GetMapping("/delete")
     public String deleteProductScreen(Model model) {

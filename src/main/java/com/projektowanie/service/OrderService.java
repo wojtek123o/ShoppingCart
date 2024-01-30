@@ -29,18 +29,18 @@ public class OrderService {
     @Autowired
     private ShoppingCartRepository shoppingCartRepository;
     @Transactional
-    public void placeOrder(CustomerOrder customerOrder, ShoppingCart shoppingCart) {
+    public void placeOrder(CustomerOrder customerOrder, ShoppingCart shoppingCart, Shipping shipping) {
         Payment payment = new Payment();
-        Shipping shipping = new Shipping();
+//        Shipping shipping = new Shipping();
         payment.setPaymentType(customerOrder.getPayment().getPaymentType());
-        shipping.setShippingType(customerOrder.getShipping().getShippingType());
-        shipping.setShippingCity(customerOrder.getShipping().getShippingCity());
-        shipping.setShippingStreet(customerOrder.getShipping().getShippingStreet());
-        shipping.setShippingStreetNumber(customerOrder.getShipping().getShippingStreetNumber());
-        shipping.setShippingHouseNumber(customerOrder.getShipping().getShippingHouseNumber());
-        shipping.setShippingPostalCode(customerOrder.getShipping().getShippingPostalCode());
+//        shipping.setShippingType(customerOrder.getShipping().getShippingType());
+//        shipping.setShippingCity(customerOrder.getShipping().getShippingCity());
+//        shipping.setShippingStreet(customerOrder.getShipping().getShippingStreet());
+//        shipping.setShippingStreetNumber(customerOrder.getShipping().getShippingStreetNumber());
+//        shipping.setShippingHouseNumber(customerOrder.getShipping().getShippingHouseNumber());
+//        shipping.setShippingPostalCode(customerOrder.getShipping().getShippingPostalCode());
 
-        BigDecimal shippingPrice = calculateShippingCost(customerOrder.getShipping().getShippingType());
+        BigDecimal shippingPrice = calculateShippingCost(shipping.getShippingType());
         shipping.setShippingPrice(shippingPrice);
         shippingRepository.save(shipping);
         paymentRepository.save(payment);

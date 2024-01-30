@@ -3,48 +3,72 @@
       layout:decorate="_shared/_layout"
       xmlns:th="http://www.thymeleaf.org">
 
-<title>Lista produktów</title>
+<head>
+    <title>Koszyk</title>
+    <link rel="stylesheet" href="shoppingCart.css">
+</head>
+
 
 <div layout:fragment="content">
-    <div class="header">
-        <h1>Lista produktów</h1>
-        <a class="btn btn-primary" th:href="@{/order/placeOrder}">Złóż zamówienie</a>
-    </div>
-    <div class="content">
-        <table class="display table table-bordered" style="width:800px">
-            <thead class="text-center">
-            <tr>
-                <th class="text-right">Id</th>
-                <th class="text-left">Nazwa</th>
-                <th class="text-left">Cena</th>
-                <th class="text-left">Ilość</th>
-                <th class="text-center" colspan="3">Akcje</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:if="${shoppingCart != null}" th:each="productInCart : ${shoppingCart.productsInCart}">
-                <td th:text="${productInCart.product.productId}"></td>
-                <td th:text="${productInCart.product.productName}"></td>
-                <td th:text="${productInCart.product.price}"></td>
-                <td th:text="${productInCart.quantity}"></td>
+    <section class="h-100">
+        <div class="container h-100 py-5">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-10">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="text-center">Koszyk</h3>
+                        <h4>Wartość całkowita: <span th:text="${shoppingCart.totalPrice}"></span> zł</h4>
+                    </div>
 
-                <td>
-                    <a class="btn btn-success" th:href="@{/shoppingCart/increaseQuantity/{productId}(productId=${productInCart.product.productId})}">+</a>
-                </td>
-                <td th:text="${productInCart.quantity}"></td>
-                <td>
-                    <a class="btn btn-warning" th:href="@{/shoppingCart/decreaseQuantity/{productId}(productId=${productInCart.product.productId})}">-</a>
-                </td>
-                <td><a class="btn btn-danger" th:href="@{/shoppingCart/removeProduct/{productId}(productId=${productInCart.product.productId})}">Usuń</a></td>
-<!--                <td><a class="btn btn-primary" th:href="@{/produkt/{produktId}/edit(produktId=${produkt.produktId})}">Edycja</a></td>-->
-<!--                <td><a class="btn btn-danger" th:href="@{/produkt/remove(id=${produkt.produktId})}">Usuwanie</a></td>-->
-            </tr>
-            </tbody>
-        </table>
-        <div>
-            <h3>Wartość koszyka: <span th:text="${shoppingCart.totalPrice}"></span> zł</h3>
+                    <div th:if="${shoppingCart != null and shoppingCart.productsInCart.size() > 0}">
+                        <div th:each="productInCart : ${shoppingCart.productsInCart}" class="card rounded-3 mb-4">
+                            <div class="card-body p-4">
+                                <div class="row d-flex justify-content-between align-items-center">
+                                    <div class="col-md-2 col-lg-2 col-xl-2">
+                                        <img
+                                                th:src="@{/assets/{imageName}(imageName=${productInCart.product.imageName})}"
+                                                class="img-fluid rounded-3" alt="Cotton T-shirt">
+                                    </div>
+                                    <div class="col-md-3 col-lg-3 col-xl-3">
+                                        <p class="lead fw-normal font-weight-bold mb-2" th:text="${productInCart.product.productName}"></p>
+                                        <p><span class="text-muted">Cena produktu: </span> <span th:text="${productInCart.product.price + ' zł'}"></span></p>
+                                    </div>
+                                    <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                        <a class="btn btn-success" th:href="@{/shoppingCart/increaseQuantity/{productId}(productId=${productInCart.product.productId})}">+</a>
+
+
+                                        <span th:if="${productInCart.quantity > 0}" th:text="${productInCart.quantity}" class="ml-2 mr-2 mt-1"></span>
+
+                                        <a class="btn btn-warning" th:href="@{/shoppingCart/decreaseQuantity/{productId}(productId=${productInCart.product.productId})}">-</a>
+
+                                    </div>
+                                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                        <h5 class="mb-0" th:text="${productInCart.productInCartTotalPrice + ' zł'}"></h5>
+                                    </div>
+                                    <div class="col-md-1 col-lg-1 col-xl-1">
+                                        <a class="btn btn-danger" th:href="@{/shoppingCart/removeProduct/{productId}(productId=${productInCart.product.productId})}">Usuń</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <a class="btn btn-success btn-block btn-lg" th:href="@{/order/placeOrder}">Złóż zamówienie</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div th:unless="${shoppingCart != null and shoppingCart.productsInCart.size() > 0}">
+                        <p class="text-center" style="font-size: 20px;">Brak produktów w koszyku.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <a class="btn btn-primary btn-block btn-lg" th:href="@{/shoppingCart/seed}">Dodaj nowy produkt</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 </div>
 
 </html>

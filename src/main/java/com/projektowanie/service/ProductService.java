@@ -40,20 +40,20 @@ public class ProductService {
                 ));
     }
 
-    @Transactional
-    public void updateProduct(Product updatedProduct) {
-        var product = getProduct(updatedProduct.getProductId());
-        var newCategoryName = updatedProduct.getCategory().getName();
-        product.setProductName(updatedProduct.getProductName());
-        product.setCatalog(updatedProduct.getCatalog());
-        product.setCategory(categoryRepository.findByName(newCategoryName)
-                .orElseGet(() -> categoryRepository.save(updatedProduct.getCategory()))
-        );
-        product.setQuantity(updatedProduct.getQuantity());
-        product.setPrice(updatedProduct.getPrice());
-        product.setImage(updatedProduct.getImage());
-        product.setDescription(updatedProduct.getDescription());
-    }
+//    @Transactional
+//    public void updateProduct(Product updatedProduct) {
+//        var product = getProduct(updatedProduct.getProductId());
+//        var newCategoryName = updatedProduct.getCategory().getName();
+//        product.setProductName(updatedProduct.getProductName());
+//        product.setCatalog(updatedProduct.getCatalog());
+//        product.setCategory(categoryRepository.findByName(newCategoryName)
+//                .orElseGet(() -> categoryRepository.save(updatedProduct.getCategory()))
+//        );
+//        product.setQuantity(updatedProduct.getQuantity());
+//        product.setPrice(updatedProduct.getPrice());
+//        product.setImage(updatedProduct.getImage());
+//        product.setDescription(updatedProduct.getDescription());
+//    }
 
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);

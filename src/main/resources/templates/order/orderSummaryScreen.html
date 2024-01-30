@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="_shared/_layout"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Zamówienie złożone</title>
+    <link rel="stylesheet" href="shoppingCart.css">
+</head>
+
+<div layout:fragment="content">
+
+    <h1 class="text-center text-success font-weight-bold">Podsumowanie!</h1>
+
+    <section class="h-100">
+        <div class="container h-100 py-5">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-10">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="text-center">Zamówione produkty</h3>
+                    </div>
+                    <div th:each="productInCart : ${shoppingCart.productsInCart}" class="card rounded-3 mb-4">
+                        <div class="card-body p-4">
+                            <div class="row d-flex justify-content-between align-items-center">
+                                <div class="col-md-2 col-lg-2 col-xl-2">
+                                    <img
+                                            th:src="@{/assets/{imageName}(imageName=${productInCart.product.imageName})}"
+                                            class="img-fluid rounded-3" alt="Cotton T-shirt">
+                                </div>
+                                <div class="col-md-3 col-lg-3 col-xl-3">
+                                    <p class="lead fw-normal font-weight-bold mb-2" th:text="${productInCart.product.productName}"></p>
+                                    <p><span class="text-muted">Cena produktu: </span> <span th:text="${productInCart.product.price + ' zł'}"></span></p>
+                                </div>
+                                <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                    <span th:text="${'Ilość: ' + productInCart.quantity}" class="ml-2 mr-2 mt-1"></span>
+                                </div>
+                                <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                    <h5 class="mb-0" th:text="${productInCart.productInCartTotalPrice + ' zł'}"></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="text-center">Szczegóły zamówienia</h3>
+                    </div>
+                    <div class="card rounded-3 mb-4">
+                        <div class="card-body p-4">
+                            <div class="col flex-column align-items-center">
+                                <p>Metoda płatności:
+                                    <span th:switch="${customerOrder.payment.paymentType.toString()}">
+                                    <span th:case="'BANK_TRANSFER'"> Płatność Online</span>
+                                    <span th:case="'CASH_ON_DELIVERY'"> Płatność przy odbiorze</span>
+                                    <span th:case="*"> - Nieznana metoda płatności</span>
+                                    </span>
+                                </p>
+                                <p>Sposób dostawy:
+                                    <span th:switch="${customerOrder.shipping.shippingType.toString()}">
+                                    <span th:case="'COURIER'"> Kurier</span>
+                                    <span th:case="'POST_OFFICE'"> Poczta</span>
+                                    <span th:case="*"> - Nieznana metoda dostawy</span>
+                                    </span>
+                                </p>
+
+                                <p>Miasto: <span th:text="${customerOrder.shipping.shippingCity}"></span></p>
+                                <p>Ulica: <span th:text="${customerOrder.shipping.shippingStreet}"></span>
+                                    <span th:text="${customerOrder.shipping.shippingStreetNumber}"></span>
+                                    <span>/</span>
+                                    <span th:text="${customerOrder.shipping.shippingHouseNumber}"></span></p>
+                                <p>Kod pocztowy: <span th:text="${customerOrder.shipping.shippingPostalCode}"></span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card rounded-3 mb-4">
+                        <div class="card-body p-4">
+                            <div class="col flex-column align-items-center">
+                                <h3 class="text-center">Całkowita kwota zamówienia: <span th:text="${customerOrder.orderTotalPrice}"></span> zł</h3>
+                                <p class="text-center">Wartość koszyka: <span th:text="${shoppingCart.totalPrice}"></span> zł</p>
+                                <p class="text-center">Rabat od wartości koszyka: <span th:text="${customerOrder.discount.name}"></span>
+                                    <span>-</span><span th:text="${customerOrder.discountTotalPrice}"></span> zł</p>
+                                <p class="text-center">Dostawa: <span th:text="${customerOrder.shipping.shippingPrice}"></span> zł</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <a class="btn btn-success btn-block btn-lg" th:href="@{/order/orderCompleted}">Zakończ i zapłać</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </div>
+</div>
+</html>

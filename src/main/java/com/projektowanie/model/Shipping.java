@@ -5,8 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -32,16 +31,15 @@ public class Shipping {
 
     private BigDecimal shippingPrice;
 
-    @NotBlank(message = "Miasto jest wymagane")
     private String shippingCity;
-    @NotBlank(message = "Ulica jest wymagana")
+
     private String shippingStreet;
-    @Positive(message = "Wpisz poprawny numer ulicy")
-    private Integer shippingStreetNumber;
-    @Positive(message = "Wpisz poprawny numer mieszkania")
-    private Integer shippingHouseNumber;
-    @Positive(message = "Wpisz poprawny kod pocztowy")
-    private Integer shippingPostalCode;
+
+    private String shippingStreetNumber;
+
+    private String shippingHouseNumber;
+
+    private String shippingPostalCode;
 
     @OneToMany (mappedBy = "shipping")
     private List<CustomerOrder> customerOrders = new ArrayList<>();
